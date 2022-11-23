@@ -1,4 +1,35 @@
-from data import MENU, resources, profit
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+profit = 0
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
 
 
 # TODO 3. Print report to see the current resources of the coffee machine
@@ -38,7 +69,7 @@ def process_coins():
 
 
 # TODO 6. Check if the transaction is successful
-def is_transaction_succesful(money_received, drink_cost):
+def is_transaction_successful(money_received, drink_cost):
     """Return True when the payment is accepted.
     Return False when the payment is declined"""
     if money_received < drink_cost:
@@ -50,6 +81,7 @@ def is_transaction_succesful(money_received, drink_cost):
         global profit
         profit += drink_cost
         return True
+
 
 # TODO 7. Make a coffee
 def make_coffee(drink_name, order_ingredients):
@@ -72,6 +104,5 @@ while is_on:
         drink = MENU[choice]
         if check_resources(drink["ingredients"]):
             payment = process_coins()
-            if is_transaction_succesful(payment, drink["cost"]):
+            if is_transaction_successful(payment, drink["cost"]):
                 make_coffee(choice, drink["ingredients"])
-
